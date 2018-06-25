@@ -9,7 +9,7 @@
         </div>
         <div class="row justify-content-md-center">
             <div class="col col-lg-6">
-               <img src="{{ asset('img/cheetah.png') }}" class="img-fluid" alt="Responsive image">
+               <img src="{{ asset('img/cheetah.svg') }}" class="img-fluid" alt="Responsive image">
             </div>
         </div>
         <div class="row">
