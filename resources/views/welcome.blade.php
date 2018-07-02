@@ -1,19 +1,56 @@
 <!doctype html>
 @extends('layouts.app')
-@section('content')
-    <div class="container">
-        <div class="row justify-content-md-center">
-            <div class="col col-lg-2">
-               <h1 class="text-center">Cheetah</h1>
-            </div>
-        </div>
-        <div class="row justify-content-md-center">
-            <div class="col col-lg-6">
-               <img src="{{ asset('img/cheetah.svg') }}" class="img-fluid" alt="Responsive image">
-            </div>
-        </div>
-        <div class="row">
 
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            @if (session('status'))
+            <div class="alert alert-success" role="alert">
+                {{ session('status') }}
+            </div>
+            @endif
+            <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+                <h1 class="display-4">Bem-vindo ao Cheetah</h1>
+                <p class="lead">Você é novo por aqui? Vamos começar.</p>
+            </div>
+            <div class="container">
+                <div class="card-deck mb-3 text-center">
+                    <div class="card mb-4 box-shadow">
+                        <div class="card-header">
+                            <h4 class="my-0 font-weight-normal">Parceiros</h4>
+                        </div>
+                        <div class="card-body">
+                            <img class="card-img-top" src="{{ asset('img/driver.png') }}" alt="Card image" >
+                            <h1 class="card-title pricing-card-title">120 viagens <small class="text-muted">/ dia</small></h1>
+                            <ul class="list-unstyled mt-3 mb-4">
+                                <li>Cargas selecionadas</li>
+                                <li>Valor do frete calculado automaticamente</li>
+                                <li>Contato direto com o cliente</li>
+                                <li>Clientes selecionados</li>
+                            </ul>
+                            <a href="/register" class="btn btn-lg btn-block btn-outline-primary">Começar</a>
+                        </div>
+                    </div>
+                    <div class="card mb-4 box-shadow">
+                        <div class="card-header">
+                            <h4 class="my-0 font-weight-normal">Passageiro</h4>
+                        </div>
+                        <div class="card-body">
+                            <img class="card-img-top" src="{{ asset('img/client.png') }}" alt="Card image">
+                            <h1 class="card-title pricing-card-title">50 <small class="text-muted">motoristas disponíveis</small></h1>
+                            <ul class="list-unstyled mt-3 mb-4">
+                                <li>Segurança</li>
+                                <li>Rapidez</li>
+                                <li>Preços justos</li>
+                                <li>Todos os tipos de carga</li>
+                            </ul>
+                            <a href="/register" class="btn btn-lg btn-block btn-outline-primary">Começar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-   
+</div>
 @endsection
