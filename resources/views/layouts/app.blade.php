@@ -9,7 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Cheetah</title>
-    <link rel="shortcut icon" href="{{{ asset('img/favico.png') }}}">
+    <link rel="shortcut icon" href="{{{ asset('img/favicon.ico') }}}">
     
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
