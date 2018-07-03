@@ -31,4 +31,14 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Veiculo');
     }
+    
+    public function entregas()
+    {
+        return $this->hasMany('App\Models\Corrida', 'motorista_id');
+    }
+    
+    public function corridas()
+    {
+        return $this->hasMany('App\Models\Corrida', 'passageiro_id');
+    }
 }

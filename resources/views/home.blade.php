@@ -3,25 +3,24 @@
 @section('content')
 @if (Auth::user()->role === 'motorista')
     <div class="container">
-        <h3 class="text-center">Lista de veículos cadastrados</h3>
+        <h3 class="text-center">Corridas disponiveis</h3>
         <table class="table">
             <thead class="thead-light">
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Placa</th>
-                    <th scope="col">Modelo</th>
-                    <th scope="col">Capacidade</th>
+                    <th scope="col">Origem</th>
+                    <th scope="col">Destino</th>
+                    <th scope="col">Passageiro</th>
+                    <th scope="col">Data</th>
                 </tr>
             </thead>
             
             <tbody>
-               
-                @foreach (Auth::user()->veiculos as $veiculo)
+                @foreach ($corridas as $corrida)
                 <tr>
-                    <th scope="row">{{$veiculo->id}}</th>
-                    <td>{{$veiculo->placa}}</td>
-                    <td>{{$veiculo->modelo}}</td>
-                    <td>{{$veiculo->capacidade}}</td>
+                    <td>{{$corrida->origem}}</td>
+                    <td>{{$corrida->destino}}</td>
+                    <td>{{$corrida->passageiro->name}}</td>
+                    <td>{{$corrida->data}}</td>
                 </tr>
                 @endforeach
             </tbody>
@@ -30,26 +29,40 @@
     </div>
 @else
     <div class="container">
-        <h3 class="text-center">Veículos disponíveis:</h2>
-        <table class="table">
-            <thead class="thead-light">
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Placa</th>
-                    <th scope="col">Modelo</th>
-                    <th scope="col">Capacidade</th>
-                </tr>
-            </thead>
-            
-            <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>ABC-123</td>
-                <td>Saveiro</td>
-                <td>6M³</td>
-            </tr>
-            </tbody>
-        </table>
-
+    
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Agendar corrida</h5>
+                <p class="card-text">Para agendar uma corrida, é só clicar no botão abaixo e cadastrar algumas informações.</p>
+                <a href="{{ url('corridas/create') }}" class="btn btn-outline-primary">Agendar corrida</a>
+            </div>
+        </div>
+    
+        <div class="py-3">
+            <h3 class="text-center">Viagens agendadadas:</h2>
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Origem</th>
+                        <th scope="col">Destino</th>
+                        <th scope="col">Motorista</th>
+                        <th scope="col">Data</th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                   
+                    @foreach (Auth::user()->corridas as $corrida)
+                    <tr>
+                        <td>{{$corrida->origem}}</td>
+                        <td>{{$corrida->destino}}</td>
+                        <td>{{$corrida->motorista?$corrida->motorista->name:"Aguardando"}}</td>
+                        <td>{{$corrida->data}}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
 @endif
 @endsection

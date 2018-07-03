@@ -19,3 +19,4 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('veiculos', 'VeiculoController');
+Route::resource('corridas', 'CorridaController');

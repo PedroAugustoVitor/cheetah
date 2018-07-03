@@ -14,6 +14,7 @@ class CreateVeiculosTable extends Migration
     public function up()
     {
         Schema::create('veiculos', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id');
             $table->char('placa', 8);
             $table->string('cor', 20);
@@ -22,7 +23,7 @@ class CreateVeiculosTable extends Migration
             $table->string('capacidade');
             $table->timestamps();
             $table->unsignedInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
