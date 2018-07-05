@@ -149,7 +149,9 @@ return [
 
         /*
          * Package Service Providers...
+         *https://github.com/LaravelLegends/pt-br-validator
          */
+         LaravelLegends\PtBrValidator\ValidatorProvider::class
 
         /*
          * Application Service Providers...
