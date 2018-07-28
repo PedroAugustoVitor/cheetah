@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Corrida;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use GMaps;
 
 class CorridaController extends Controller
 {
@@ -25,7 +26,19 @@ class CorridaController extends Controller
      */
     public function create()
     {
-        return view('corridas.create');
+        $config['center'] = 'Salvador, Bahia, Brazil';
+        $config['zoom'] = 'auto';
+        $config['places'] = TRUE;
+        $config['directions'] = TRUE;
+        $marker = array();
+        $marker['position'] = 'Rua Silveira Martins, 50, Salvador, Bahia, Brasil';
+        $marker['draggable'] = true;
+        $marker['ondragend'] = 'alert(\'You just dropped me at: \' + event.latLng.lat() + \', \' + event.latLng.lng());';
+        GMaps::add_Marker($marker);
+        GMaps::initialize($config);
+        $map = GMaps::create_map();
+        //dd($map);
+        return view('corridas.create')->with('map', $map);
     }
 
     /**

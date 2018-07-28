@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <link href="{{ asset('css/switch-button.css') }}" rel="stylesheet">
-
+{!! $map['js'] !!}
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -11,6 +11,8 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('corridas.store') }}" aria-label="{{ __('Agendar Corrida') }}">
                         @csrf
+                        {!! $map['html'] !!}
+                        <div id="directionsDiv"></div>
                         <div class="form-group row">
                             <label for="origem" class="col-md-4 col-form-label text-md-right">{{ __('Origem') }}</label>
 
@@ -29,7 +31,6 @@
 
                             <div class="col-md-6">
                                 <input id="destino" type="text" class="form-control{{ $errors->has('destino') ? ' is-invalid' : '' }}" name="destino" value="{{ old('destino') }}" required>
-
                                 @if ($errors->has('destino'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('destino') }}</strong>
@@ -119,4 +120,8 @@
         </div>
     </div>
 </div>
+
+<script>
+    console.log();
+</script>
 @endsection

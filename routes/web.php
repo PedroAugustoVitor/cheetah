@@ -12,7 +12,16 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $config['center'] = '37.4419, -122.1419';
+    $config['zoom'] = 'auto';
+    $config['directions'] = TRUE;
+    $config['directionsStart'] = 'empire state building';
+    $config['directionsEnd'] = 'statue of liberty';
+    $config['directionsDivID'] = 'directionsDiv';
+    GMaps::initialize($config);
+    $map = GMaps::create_map();
+    return view('welcome')->with('map', $map);
+    //return view('welcome');
 });
 
 Auth::routes();
