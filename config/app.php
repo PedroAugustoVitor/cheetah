@@ -91,7 +91,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'en',
+    'fallback_locale' => 'pt-br',
 
     /*
     |--------------------------------------------------------------------------
@@ -150,8 +150,14 @@ return [
 
         /*
          * Package Service Providers...
+         *https://github.com/LaravelLegends/pt-br-validator
          */
+<<<<<<< HEAD
     
+=======
+         LaravelLegends\PtBrValidator\ValidatorProvider::class,
+
+>>>>>>> ebf2567f95007969a7b5a41796cae5e0817de9ac
         /*
          * Application Service Providers...
          */
