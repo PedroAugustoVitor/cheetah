@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Corrida extends Model
 {
     protected $fillable = [
-        'origem', 'destino', 'data', 'hora', 'volume', 'peso', 'fragil'
+        'origem', 'destino', 'data', 'hora', 'volume', 'peso', 'fragil', 'tempo', 'distancia'
     ];
     
     public function passageiro()

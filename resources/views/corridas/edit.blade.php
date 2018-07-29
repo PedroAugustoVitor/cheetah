@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <link href="{{ asset('css/switch-button.css') }}" rel="stylesheet">
+{!! $map['js'] !!}
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -10,6 +11,7 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('corridas.store') }}" aria-label="{{ __('Agendar Corrida') }}">
                         @csrf
+                        {!! $map['html'] !!}
                         <div id="directionsDiv"></div>
                         <div class="form-group row">
                             <label for="origem" class="col-md-4 col-form-label text-md-right">{{ __('Origem') }}</label>
@@ -28,7 +30,7 @@
                             <label for="destino" class="col-md-4 col-form-label text-md-right">{{ __('Destino') }}</label>
 
                             <div class="col-md-6">
-                                <input id="destino" type="text" onchange="updateData()" class="form-control{{ $errors->has('destino') ? ' is-invalid' : '' }}" name="destino" value="{{ old('destino') }}" required>
+                                <input id="destino" type="text" class="form-control{{ $errors->has('destino') ? ' is-invalid' : '' }}" name="destino" value="{{ old('destino') }}" required>
                                 @if ($errors->has('destino'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('destino') }}</strong>
@@ -89,10 +91,11 @@
                             </div>
                         </div>
                         <div class="form-group row">
-
+                            
                             <label for="fragil" class="col-md-4 col-form-label text-md-right">{{ __('Frágil') }}</label>
 
                             <div class="col-md-6">
+                                <!--<checkbox id="fragil" type="text" class="form-control{{ $errors->has('fragil') ? ' is-invalid' : '' }}" name="fragil" value="{{ old('peso') }}" required>-->
                                 <label class="switch">
                                     <input type="checkbox" id="fragil" name="fragil" >
                                     <span class="slider round"></span>
@@ -104,37 +107,11 @@
                                 @endif
                             </div>
                         </div>
-                        <input id="distancia" type="hidden" name="distancia" value="{{ old('destino') }}" required>
-                        <input id="tempo" type="hidden" name="tempo" value="{{ old('destino') }}" required>
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#fecharCorrida">
-                                    Fechar corrida
+                                <button type="submit" class="btn btn-outline-primary">
+                                    {{ __('Registrar') }}
                                 </button>
-                            </div>
-                        </div>
-                        <div class="modal fade" id="fecharCorrida" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Confirmar corrida</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <h5 class="card-title">Distância do percurso</h5>
-                                        <p class="card-text" id="percurso">Não calculado</p>
-                                        <h5 class="card-title">Duração do percurso</h5>
-                                        <p class="card-text" id="duracao">Não calculado</p>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                        <button type="submit" class="btn btn-outline-primary">
-                                            {{ __('Registrar') }}
-                                        </button>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </form>
@@ -143,41 +120,8 @@
         </div>
     </div>
 </div>
+
 <script>
-    var origem = 'Salvador, Bahia';
-    var destino = 'Tucano, Bahia';
-
-    var updateData  = function() {
-        origem = $("#origem").val();
-        destino = $("#destino").val();
-        initMap();
-    };
-
-    var initMap  = function() {
-
-
-        console.log(origem);
-
-        var service = new google.maps.DistanceMatrixService;
-        service.getDistanceMatrix({
-            origins: [origem],
-            destinations: [destino],
-            travelMode: 'DRIVING',
-            unitSystem: google.maps.UnitSystem.METRIC,
-            avoidHighways: false,
-            avoidTolls: false
-        }, function(response, status) {
-            if (status !== 'OK') {
-                alert('Error was: ' + status);
-            }
-            else {
-                $("#distancia").val(response.rows[0].elements[0].distance.value);
-                $("#tempo").val(response.rows[0].elements[0].duration.text);
-                $("#duracao").text(response.rows[0].elements[0].duration.text);
-                $("#percurso").text(response.rows[0].elements[0].distance.text);
-            }
-        });
-    };
+    console.log();
 </script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB-h1rDFw27LBTrkUerMrMgUwakB2-YmaA&callback=initMap"></script>
 @endsection

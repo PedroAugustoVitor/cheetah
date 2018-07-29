@@ -9,11 +9,9 @@
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.6.*",
         "laravel/tinker": "^1.0",
-<<<<<<< HEAD
-        "farhanwazir/laravelgooglemaps": "^2.3"
-=======
+        "farhanwazir/laravelgooglemaps": "^2.3",
         "laravellegends/pt-br-validator" : "5.1.*"
->>>>>>> ebf2567f95007969a7b5a41796cae5e0817de9ac
+
     },
     "require-dev": {
         "filp/whoops": "^2.0",

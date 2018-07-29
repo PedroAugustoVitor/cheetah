@@ -17,7 +17,7 @@
             <tbody>
                 @foreach ($corridas as $corrida)
                 <tr>
-                    <td>{{$corrida->origem}}</td>
+                    <td><a href="{{url ('corridas/'.$corrida->id)}}">{{$corrida->origem}}</a></td>
                     <td>{{$corrida->destino}}</td>
                     <td>{{$corrida->passageiro->name}}</td>
                     <td>{{$corrida->data}}</td>
@@ -54,7 +54,7 @@
                    
                     @foreach (Auth::user()->corridas as $corrida)
                     <tr>
-                        <td>{{$corrida->origem}}</td>
+                        <td><a href="{{url ('corridas/'.$corrida->id)}}">{{$corrida->origem}}</a></td>
                         <td>{{$corrida->destino}}</td>
                         <td>{{$corrida->motorista?$corrida->motorista->name:"Aguardando"}}</td>
                         <td>{{$corrida->data}}</td>

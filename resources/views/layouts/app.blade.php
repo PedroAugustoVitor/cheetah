@@ -46,9 +46,9 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item dropdown show">
+                        <li class="nav-item dropdown">
                           <a class="nav-link dropdown-toggle" href="#" id="dropdown10" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Meus veículos</a>
-                          <div class="dropdown-menu show" aria-labelledby="dropdown10">
+                          <div class="dropdown-menu" aria-labelledby="dropdown10">
                             <a class="dropdown-item" href="#">Listar</a>
                             <a class="dropdown-item" href="#">Adicionar</a>
                           </div>
@@ -72,9 +72,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
@@ -88,8 +86,6 @@
                 </div>
             </div>
         </nav>
-           <!-- Fixed navbar -->
-       <!-- Fixed navbar -->
         <main class="py-4">
             @yield('content')
         </main>

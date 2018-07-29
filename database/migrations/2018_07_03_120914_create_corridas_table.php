@@ -21,6 +21,8 @@ class CreateCorridasTable extends Migration
             $table->timestamps();
             $table->string('origem');
             $table->string('destino');
+            $table->string('tempo');
+            $table->string('distancia');
             $table->date('data');
             $table->time('hora');
             $table->double('volume', 8, 2);

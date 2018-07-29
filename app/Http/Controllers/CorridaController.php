@@ -16,7 +16,7 @@ class CorridaController extends Controller
      */
     public function index()
     {
-        //
+        return "index";
     }
 
     /**
@@ -26,15 +26,12 @@ class CorridaController extends Controller
      */
     public function create()
     {
-        $config['center'] = 'Salvador, Bahia, Brazil';
+        $config['center'] = '37.4419, -122.1419';
         $config['zoom'] = 'auto';
         $config['places'] = TRUE;
-        $config['directions'] = TRUE;
-        $marker = array();
-        $marker['position'] = 'Rua Silveira Martins, 50, Salvador, Bahia, Brasil';
-        $marker['draggable'] = true;
-        $marker['ondragend'] = 'alert(\'You just dropped me at: \' + event.latLng.lat() + \', \' + event.latLng.lng());';
-        GMaps::add_Marker($marker);
+        $config['placesAutocompleteInputID'] = 'origem';
+        $config['placesAutocompleteBoundsMap'] = TRUE; // set results biased towards the maps viewport
+        //$config['placesAutocompleteOnChange'] = 'alert(\'You selected a place\');';
         GMaps::initialize($config);
         $map = GMaps::create_map();
         //dd($map);
@@ -57,6 +54,8 @@ class CorridaController extends Controller
         $corrida->hora = $request->hora;
         $corrida->volume = $request->volume;
         $corrida->peso = $request->peso;
+        $corrida->distancia = $request->distancia;
+        $corrida->tempo = $request->tempo;
         $request->fragil? $corrida->fragil = true: $corrida->fragil = false;
         $corrida->passageiro_id = Auth::user()->id;
         $corrida->save();
@@ -71,7 +70,15 @@ class CorridaController extends Controller
      */
     public function show(Corrida $corrida)
     {
-        //
+        $config['center'] = '37.4419, -122.1419';
+        $config['zoom'] = 'auto';
+        $config['directions'] = TRUE;
+        $config['directionsStart'] = $corrida->origem;
+        $config['directionsEnd'] = $corrida->destino;
+        $config['directionsDivID'] = 'directionsDiv';
+        GMaps::initialize($config);
+        $map = GMaps::create_map();
+        return view('corridas.show', compact ('corrida', 'map'));
     }
 
     /**
@@ -82,7 +89,7 @@ class CorridaController extends Controller
      */
     public function edit(Corrida $corrida)
     {
-        //
+        return view('corridas.edit');
     }
 
     /**
@@ -94,7 +101,9 @@ class CorridaController extends Controller
      */
     public function update(Request $request, Corrida $corrida)
     {
-        //
+        $corrida->fill($request->all());
+        $corrida->save;
+        return redirect('home');
     }
 
     /**
