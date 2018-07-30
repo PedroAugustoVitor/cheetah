@@ -4,8 +4,8 @@
 @if (Auth::user()->role === 'motorista')
     <div class="container">
         <h3 class="text-center">Corridas disponiveis</h3>
-        <table class="table">
-            <thead class="thead-light">
+        <table class="table table-hover table-light">
+            <thead class="thead">
                 <tr>
                     <th scope="col">Origem</th>
                     <th scope="col">Destino</th>
@@ -40,8 +40,8 @@
     
         <div class="py-3">
             <h3 class="text-center">Viagens agendadadas:</h2>
-            <table class="table">
-                <thead class="thead-light">
+            <table class="table table-hover table-light">
+                <thead class="thead">
                     <tr>
                         <th scope="col">Origem</th>
                         <th scope="col">Destino</th>

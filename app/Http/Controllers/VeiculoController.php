@@ -15,7 +15,7 @@ class VeiculoController extends Controller
      */
     public function index()
     {
-        //
+        return view('veiculos.index');
     }
 
     /**
@@ -55,9 +55,9 @@ class VeiculoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Veiculo $veiculo)
     {
-        //
+        return view('veiculos.show', compact('veiculo'));
     }
 
     /**
