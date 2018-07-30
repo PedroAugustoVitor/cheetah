@@ -46,7 +46,7 @@ class VeiculoController extends Controller
         
 
         $veiculo->save();
-        return redirect('home');
+        return redirect('veiculos');
     }
 
     /**
@@ -89,8 +89,11 @@ class VeiculoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Veiculo $veiculo)
     {
-        //
+        
+        $veiculo->delete();
+        session()->flash('message', 'FUNCIONOU DESÇRAÇA!');
+        return redirect('veiculos');
     }
 }

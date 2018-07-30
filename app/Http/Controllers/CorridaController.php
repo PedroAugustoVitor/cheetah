@@ -115,5 +115,7 @@ class CorridaController extends Controller
     public function destroy(Corrida $corrida)
     {
         $corrida->destroy();
+        Session::flash('message', 'FUNCIONOU DESÇRAÇA!');
+        redirect('index');
     }
 }
