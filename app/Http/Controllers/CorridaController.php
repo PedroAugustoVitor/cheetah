@@ -18,7 +18,7 @@ class CorridaController extends Controller
 
     public function index()
     {
-        return "index";
+        return view('corridas.index');
     }
 
     /**
@@ -28,16 +28,7 @@ class CorridaController extends Controller
      */
     public function create()
     {
-        $config['center'] = '37.4419, -122.1419';
-        $config['zoom'] = 'auto';
-        $config['places'] = TRUE;
-        $config['placesAutocompleteInputID'] = 'origem';
-        $config['placesAutocompleteBoundsMap'] = TRUE; // set results biased towards the maps viewport
-        //$config['placesAutocompleteOnChange'] = 'alert(\'You selected a place\');';
-        GMaps::initialize($config);
-        $map = GMaps::create_map();
-        //dd($map);
-        return view('corridas.create')->with('map', $map);
+        return view('corridas.create');
     }
 
     /**
@@ -50,17 +41,11 @@ class CorridaController extends Controller
     {
         //'origem', 'destino', 'data', 'hora', 'volume', 'peso', 'fragil'
         $corrida = new Corrida;
-        $corrida->origem = $request->origem;
-        $corrida->destino = $request->destino;
-        $corrida->data = $request->data;
-        $corrida->hora = $request->hora;
-        $corrida->volume = $request->volume;
-        $corrida->peso = $request->peso;
-        $corrida->distancia = $request->distancia;
-        $corrida->tempo = $request->tempo;
+        $corrida->fill($request->all());
         $request->fragil? $corrida->fragil = true: $corrida->fragil = false;
         $corrida->passageiro_id = Auth::user()->id;
         $corrida->save();
+        session()->flash('message', 'Corrida salva com sucesso.');
         return redirect('home');
     }
 
@@ -91,7 +76,7 @@ class CorridaController extends Controller
      */
     public function edit(Corrida $corrida)
     {
-        return view('corridas.edit');
+        return view('corridas.edit', compact('corrida'));
     }
 
     /**
@@ -104,8 +89,10 @@ class CorridaController extends Controller
     public function update(Request $request, Corrida $corrida)
     {
         $corrida->fill($request->all());
-        $corrida->save;
-        return redirect('home');
+        $corrida->fragil == 'on'? $corrida->fragil = true: $corrida->fragil = false;
+        $corrida->save();
+        session()->flash('message', 'Corrida atualizado com sucesso.');
+        return redirect('corridas');
     }
 
     /**
@@ -116,8 +103,8 @@ class CorridaController extends Controller
      */
     public function destroy(Corrida $corrida)
     {
-        $corrida->destroy();
-        Session::flash('message', 'FUNCIONOU DESÇRAÇA!');
-        redirect('index');
+        $corrida->delete();
+        session()->flash('message', 'Registro apagado com sucesso!');
+        return redirect('corridas');
     }
 }

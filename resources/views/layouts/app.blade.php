@@ -15,7 +15,6 @@
     <!-- Scripts -->
     <script src="{{ asset('js/jquery-3.3.1.min.js') }}" ></script>
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}" ></script>
-    <script src="{{ asset('js/app.js') }}" defer></script>
     
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -51,15 +50,17 @@
                             </li>
                         </ul>
                     @else
+                        @if(Auth::user()->role == 'motorista')
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item dropdown">
                               <a class="nav-link dropdown-toggle" href="#" id="dropdown10" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Meus veículos</a>
                               <div class="dropdown-menu" aria-labelledby="dropdown10">
                                 <a class="dropdown-item" href="{{url('veiculos') }}">Listar</a>
-                                <a class="dropdown-item" href="{{url('veiculos.create') }}">Adicionar</a>
+                                <a class="dropdown-item" href="{{url('veiculos/create') }}">Adicionar</a>
                               </div>
                             </li>
                         </ul>
+                        @endif
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -67,10 +68,12 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ url('corridas') }}">
+                                        {{ __('Minhas corridas') }}
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
-
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
@@ -83,15 +86,16 @@
             </div>
         </nav>
         <main class="py-4">
-        @if (Session::has('message'))
+        <div class="container">
+            @if (Session::has('message'))
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
                 <strong>{{ Session::get('message') }}</strong>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-        	<div class="alert alert-info"></div>
-        @endif
+            @endif
+
         @yield('content')
         </main>
     </div>
@@ -102,3 +106,4 @@
     </footer>
 </body>
 </html>
+<s

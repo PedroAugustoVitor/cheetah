@@ -1,9 +1,6 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        @if (Session::has('message'))
-        	<div class="alert alert-info">{{ Session::get('message') }}</div>
-        @endif
         <h3 class="text-center">Veiculos cadastrados</h3>
         <table class="table table-hover table-light">
             <thead class="thead">

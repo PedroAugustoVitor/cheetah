@@ -51,9 +51,8 @@ class VeiculoController extends Controller
         $veiculo->ano = $request->ano;
         $veiculo->modelo = $request->modelo;
         $veiculo->capacidade = $request->capacidade;
-        
-
         $veiculo->save();
+        session()->flash('message', 'Veículo cadastrado com sucesso!');
         return redirect('veiculos');
     }
 
@@ -71,12 +70,12 @@ class VeiculoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  Veiculo  $veiculo
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Veiculo $veiculo)
     {
-        //
+        return view('veiculos.edit', compact('veiculo'));
     }
 
     /**
@@ -86,15 +85,19 @@ class VeiculoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Veiculo $veiculo)
     {
-        //
+        $veiculo->fill($request->all());
+        $veiculo->save();
+        session()->flash('message', 'Veículo atualizado com sucesso.');
+        return redirect('veiculos');
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  Veiculo  $veiculo
      * @return \Illuminate\Http\Response
      */
     public function destroy(Veiculo $veiculo)
