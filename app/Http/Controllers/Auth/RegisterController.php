@@ -78,5 +78,6 @@ class RegisterController extends Controller
             'celular' => $data['celular'],
             'role' => $data['role'],
         ]);
+        session()->flash('message', 'Veículo atualizado com sucesso.');
     }
 }
