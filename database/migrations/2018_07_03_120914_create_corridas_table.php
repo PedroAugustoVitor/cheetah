@@ -28,13 +28,13 @@ class CreateCorridasTable extends Migration
             $table->double('volume', 8, 2);
             $table->double('peso', 8, 2);
             $table->boolean('fragil');
+            $table->decimal('valor', 5, 2)->nullable();
             $table->unsignedInteger('motorista_id')->nullable();
             $table->unsignedInteger('passageiro_id');
             $table->foreign('passageiro_id')
                 ->references('id')->on('users')
                 ->onDelete('cascade');
             $table->foreign('motorista_id')->references('id')->on('users');
-
         });
     }
 

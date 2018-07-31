@@ -28,7 +28,7 @@
                             <label for="destino" class="col-md-4 col-form-label text-md-right">{{ __('Destino') }}</label>
 
                             <div class="col-md-6">
-                                <input id="destino" type="text" onchange="updateData()" class="form-control{{ $errors->has('destino') ? ' is-invalid' : '' }}" name="destino" value="{{ old('destino') }}" required>
+                                <input id="destino" type="text"  class="form-control{{ $errors->has('destino') ? ' is-invalid' : '' }}" name="destino" value="{{ old('destino') }}" required>
                                 @if ($errors->has('destino'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('destino') }}</strong>
@@ -104,11 +104,12 @@
                                 @endif
                             </div>
                         </div>
-                        <input id="distancia" type="hidden" name="distancia" value="{{ old('destino') }}" required>
-                        <input id="tempo" type="hidden" name="tempo" value="{{ old('destino') }}" required>
+                        <input id="distancia" type="hidden" name="distancia" value="{{ old('distancia') }}" required>
+                        <input id="tempo" type="hidden" name="tempo" value="{{ old('tempo') }}" required>
+                        <input id="valor" type="hidden" name="valor" value="{{ old('valor') }}" required>
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#fecharCorrida">
+                                <button type="button" onclick="updateData()" class="btn btn-primary" data-toggle="modal" data-target="#fecharCorrida" id="btn-finish">
                                     Fechar corrida
                                 </button>
                             </div>
@@ -131,7 +132,7 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                                         <button type="submit" class="btn btn-outline-primary">
-                                            {{ __('Registrar') }}
+                                            {{ __('Finalizar solicitação') }}
                                         </button>
                                     </div>
                                 </div>
@@ -145,19 +146,18 @@
 </div>
 <script>
     var origem = 'Salvador, Bahia';
-    var destino = 'Tucano, Bahia';
+    var destino = 'Salvador, Bahia';
+    var preco;
+    var distancia = 0;
 
     var updateData  = function() {
         origem = $("#origem").val();
         destino = $("#destino").val();
         initMap();
+
     };
 
     var initMap  = function() {
-
-
-        console.log(origem);
-
         var service = new google.maps.DistanceMatrixService;
         service.getDistanceMatrix({
             origins: [origem],
@@ -175,9 +175,15 @@
                 $("#tempo").val(response.rows[0].elements[0].duration.text);
                 $("#duracao").text(response.rows[0].elements[0].duration.text);
                 $("#percurso").text(response.rows[0].elements[0].distance.text);
+                distancia =response.rows[0].elements[0].distance.value;
+                preco = 20 + 0.00175 * response.rows[0].elements[0].distance.value + 0.90 * parseInt($("#peso").val()) + 0.50 * $("#volume").val();
+                $("#valor").val(preco);
+                console.log(preco);
+                if ($('#fragil').is(":checked")) preco *= 1.2;
             }
         });
     };
+
 </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB-h1rDFw27LBTrkUerMrMgUwakB2-YmaA&callback=initMap"></script>
 @endsection

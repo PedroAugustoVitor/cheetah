@@ -2,7 +2,10 @@
 @section('content')
     <div class="container">
         <div class="jumbotron jumbotron-fluid">
-            <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#destroyModal">Apagar veículo</button>
+            <div class="offset-8">
+                <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#destroyModal">Apagar veículo</button>
+                <a href="{{url('veiculos/'.$veiculo->id.'/edit')}}" class="btn btn-outline-primary">Editar veículo</a>
+            </div>
             <div class="container">
                 <h1 class="display-4">{{$veiculo->modelo}}</h1>
                 <p class="lead"><strong>Cor do veículo: </strong>{{$veiculo->cor}}</p>
