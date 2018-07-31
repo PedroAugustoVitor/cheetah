@@ -67,6 +67,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        session()->flash('message', 'Veículo atualizado com sucesso.');
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -78,6 +79,5 @@ class RegisterController extends Controller
             'celular' => $data['celular'],
             'role' => $data['role'],
         ]);
-        session()->flash('message', 'Veículo atualizado com sucesso.');
     }
 }
