@@ -13,6 +13,14 @@ class VeiculoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+     
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'placa' => 'required|formato_placa_de_veiculo'
+        ]);
+    }
+    
     public function index()
     {
         return view('veiculos.index');
@@ -96,7 +104,7 @@ class VeiculoController extends Controller
     {
         
         $veiculo->delete();
-        session()->flash('message', 'FUNCIONOU DESÇRAÇA!');
+        session()->flash('message', 'Veículo removido com sucesso!');
         return redirect('veiculos');
     }
 }

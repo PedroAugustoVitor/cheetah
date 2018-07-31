@@ -22,8 +22,8 @@ class CreateUsersTable extends Migration
             $table->date('dataNascimento');
             $table->char('cpf', 14);
             $table->char('cep', 9);
-            $table->char('telefone', 9);
-            $table->char('celular', 10);
+            $table->char('telefone', 15);
+            $table->char('celular', 15);
             $table->enum('role', ['motorista', 'passageiro']);
             $table->rememberToken();
             $table->timestamps();
