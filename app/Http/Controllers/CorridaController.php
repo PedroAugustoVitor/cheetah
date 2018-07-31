@@ -39,17 +39,9 @@ class CorridaController extends Controller
     {
         //'origem', 'destino', 'data', 'hora', 'volume', 'peso', 'fragil'
         $corrida = new Corrida;
-        $corrida->origem = $request->origem;
-        $corrida->destino = $request->destino;
-        $corrida->data = $request->data;
-        $corrida->hora = $request->hora;
-        $corrida->volume = $request->volume;
-        $corrida->peso = $request->peso;
-        $corrida->distancia = $request->distancia;
-        $corrida->tempo = $request->tempo;
+        $corrida->fill($request->all());
         $request->fragil? $corrida->fragil = true: $corrida->fragil = false;
         $corrida->passageiro_id = Auth::user()->id;
-        $corrida->valor = $request->valor;
         $corrida->save();
         session()->flash('message', 'Corrida salva com sucesso.');
         return redirect('home');
@@ -82,7 +74,7 @@ class CorridaController extends Controller
      */
     public function edit(Corrida $corrida)
     {
-        return view('corridas.edit', $corrida);
+        return view('corridas.edit', compact('corrida'));
     }
 
     /**
@@ -95,6 +87,7 @@ class CorridaController extends Controller
     public function update(Request $request, Corrida $corrida)
     {
         $corrida->fill($request->all());
+        $corrida->fragil == 'on'? $corrida->fragil = true: $corrida->fragil = false;
         $corrida->save();
         session()->flash('message', 'Corrida atualizado com sucesso.');
         return redirect('corridas');
@@ -109,7 +102,7 @@ class CorridaController extends Controller
     public function destroy(Corrida $corrida)
     {
         $corrida->delete();
-        Session::flash('message', 'Registro apagado com sucesso!');
-        return redirect('index');
+        session()->flash('message', 'Registro apagado com sucesso!');
+        return redirect('corridas');
     }
 }
