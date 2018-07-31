@@ -136,7 +136,7 @@
 
                             <div class="col-md-6">
                                 <select id="role" type="select" class="form-control{{ $errors->has('role') ? ' is-invalid' : '' }}" name="role">
-                                    <option value="motorista">Parceiro</option> 
+                                    <option value="motorista">Motorista</option> 
                                     <option value="passageiro" selected>Passageiro</option>
                                 </select>
 
