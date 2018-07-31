@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
+
 class RegisterController extends Controller
 {
     /*
@@ -53,7 +54,8 @@ class RegisterController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
             'dataNascimento' => 'required|string|date',
-            'cpf' => 'required|cpf'
+            'cpf' => 'required|cpf',
+            'celular' => 'required|celular_com_ddd'
         ]);
     }
 

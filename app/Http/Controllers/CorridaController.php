@@ -6,6 +6,7 @@ use App\Models\Corrida;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use GMaps;
+use Validador;
 
 class CorridaController extends Controller
 {
@@ -14,6 +15,7 @@ class CorridaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         return "index";
